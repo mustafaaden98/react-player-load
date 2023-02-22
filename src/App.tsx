@@ -13,6 +13,7 @@ function App() {
   const playerRef = useRef<BaseReactPlayer<ReactPlayerProps>>(null)
   const [timer, setTimer] = useState<number>(0);
   const ref = useRef<ReturnType<typeof setInterval> | undefined>();
+  const timerRef = useRef<number>(0)
 
   useEffect(() => {
     if(!isVideoPlayerLoading) {
@@ -23,8 +24,9 @@ function App() {
 
   const startTimer = () => {
     ref.current = setInterval(() => {
-      setTimer((oldCount) => oldCount + 1);
-    }, 1000)
+      // setTimer((oldCount) => oldCount + 1);
+      timerRef.current = timerRef.current + 1
+    }, 10)
 }
   useEffect(() => {
       return () => clearInterval(ref.current)
@@ -35,7 +37,8 @@ function App() {
     if (isVideoPlayerLoading) {
       startTimer();
     } else {
-      setTimer(0)
+      // setTimer(0)
+      timerRef.current = 0;
       clearInterval(ref.current)
       setIsVideoPlayerLoading()
     }
@@ -48,6 +51,7 @@ function App() {
     setIsVideoPlayerLoading,
   }
 
+
   return (
     <div className="App">
     <div style={{backgroundColor:'black', padding:'10px'}}>
@@ -58,7 +62,7 @@ function App() {
     </div>
     <div style = {{marginBottom: '50px', marginTop:'10px'}}>
           <span style={{color: 'green'}}>Time it takes to laod the video player</span>{" "}
-          <span style={{color: 'red', fontSize:'20px'}}>{timer}</span>{" "}
+          <span style={{color: 'red', fontSize:'20px'}}>{timerRef.current/100}</span>{" "}
           <span style={{color: 'green'}}>secs</span>
     </div>
 

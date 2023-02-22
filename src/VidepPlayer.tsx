@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { ReactPlayerProps } from 'react-player';
 import BaseReactPlayer from 'react-player/base';
-
+// import ReactPlayer  from 'react-player'
 const ReactPlayer = lazy(() => import(/* webpackChunkName: "react-player" */ 'react-player'))
 
 interface VideoPlayerProps {
